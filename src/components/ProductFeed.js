@@ -3,7 +3,8 @@ import Product from "./Product";
 function ProductFeed({ products }) {
   console.log(products);
   return (
-    <div className="grid grid-flow-row-dence md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto">
+    //  grid-flow-row-dense -> used for space utilization
+    <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto">
       {/* products.slice(0,4) -> it shows only 4 products */}
       {products
         .slice(0, 4)

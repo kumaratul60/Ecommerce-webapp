@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 import Currency from "react-currency-formatter";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../slices/basketSlice";
 
 const Max_Rating = 5;
 const Min_Rating = 1;
@@ -9,6 +11,8 @@ const Min_Rating = 1;
 function Product({ id, title, price, description, category, image }) {
   // State is sort term memory per component
   // useState take initial state.
+
+  const dispatch = useDispatch(addToBasket);
 
   //const [rating] = useState(5);
 
@@ -18,9 +22,25 @@ function Product({ id, title, price, description, category, image }) {
 
   const [hasPrime] = useState(Math.random() < 0.5);
 
+  const addItemToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      rating,
+      hasPrime,
+    };
+
+    // Sending the product as an action to the  REDUX store (the basket slice)
+    dispatch(addToBasket(product)); // dispatching the action
+  };
+
   return (
     <div className="relative flex flex-col m-5 bg-white z-30 p-10">
-      <p className="absolute top-2 right-2 text-xs itallic text-gray-400">
+      <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {category}
       </p>
 
@@ -29,6 +49,9 @@ function Product({ id, title, price, description, category, image }) {
       <h4 className="my-3 ">{title}</h4>
 
       <div className="flex">
+        {/*    {Array(rating).fill() -> create a array and fill up with empty 
+          value and map through those values, it takes 2 parameter, initial value and index */}
+
         {Array(rating)
           .fill()
           .map((_, i) => (
@@ -48,7 +71,9 @@ function Product({ id, title, price, description, category, image }) {
           <p className="text-xs text-gray-500">Free Next-day Delivery</p>
         </div>
       )}
-      <button className = "mt-auto button">Add to basket</button>
+      <button onClick={addItemToBasket} className="mt-auto button">
+        Add to basket
+      </button>
     </div>
   );
 }

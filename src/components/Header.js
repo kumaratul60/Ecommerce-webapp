@@ -4,8 +4,16 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
+import { signIn, signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectItems } from "../slices/basketSlice";
 
 function Header() {
+  const [session, loading] = useSession();
+  const router = useRouter(); // this router hook gives the object
+  const items = useSelector(selectItems);
+
   return (
     <header>
       {/* Top nav */}
@@ -17,10 +25,11 @@ function Header() {
         {/* mt-2 = margin-top of 2, and container should be flex , sm:flex-grow-0 => this for mobile view*/}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
+            onClick={() => router.push("/")} // we can use link but link is good for text
             src="https://links.papareact.com/f90"
             width={150}
             height={40}
-            objectFit="contain" // this keep the fit the aspect ratio, from after to biginning
+            objectFit="contain" // this keep the fit the aspect ratio, from after to beginning
             className="cursor-pointer"
           />
         </div>
@@ -38,21 +47,35 @@ function Header() {
         {/* Right */}
 
         <div className="text-white flex  items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div className="link">
-            <p> hello Atul</p>
+          <div
+            onClick={!session ? signIn : signOut}
+            className="cursor-pointer link"
+          >
+            <p className="hover:underline">
+              {session ? `Hello, ${session.user.name}` : "Sign In "}
+            </p>
             <p className="font-bold md:text-sm">Account & List</p>
           </div>
-          <div className="link">
-            <p>return</p>
+          <div
+            onClick={() => router.push("/orders  ")}
+            className="cursor-pointer link"
+          >
+            <p>Return</p>
             <p className="font-bold md:text-sm">& Order</p>
           </div>
-          <div className="relative link flex items-center">
+          <div
+            onClick={() => router.push("/checkout")}
+            className="relative flex items-center"
+          >
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full  text-black font-bold">
-              0
+              {/* 0 */}
+              {items.length}
             </span>
 
-            <ShoppingCartIcon className="h-10" />
-            <p className="hidden md:inline font-bold md:text-sm mt-2">Basket</p>
+            <ShoppingCartIcon className="h-10 cursor-pointer link" />
+            <p className="hidden hover:underline cursor-pointer link md:inline font-bold md:text-sm mt-2">
+              Basket
+            </p>
           </div>
         </div>
       </div>
@@ -60,7 +83,7 @@ function Header() {
       {/* Bottom nav */}
 
       <div className="flex item-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
-        <p className="link flex items-ceneter">
+        <p className="link flex items-center">
           <MenuIcon className="h-6 mr-1 hover:cursor-pointer" />
           All
         </p>
