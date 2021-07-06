@@ -22,15 +22,17 @@ function Success() {
             below to countinue the shopping. */}
           <p>
             Thank you for taking the time to complete this order.We'll send a
-            confirmation once your order has shipped.
+            confirmation once your order has shipped.If you would like to check
+            the status of your order(s),please press the link
+            below to see your order.
           </p>
-          {/* <button
-            // onClick={() => router.push("/orders")}
+          <button
+             onClick={() => router.push("/orders")}
             
             className="button mt-8 "
           >
-            Go to Home
-          </button> */}
+            Go to my order
+          </button>
         </div>
       </main>
     </div>
