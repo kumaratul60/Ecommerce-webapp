@@ -28,7 +28,7 @@ function CheckoutProducts({
     };
 
     //Push Item into Redux
-    dispatch(addToBasket());
+    dispatch(addToBasket(product));
   };
   const removeItemFromBasket = () => {
     // Remove the item from Redux
@@ -62,6 +62,7 @@ function CheckoutProducts({
               src="https://links.papareact.com/fdw"
               alt=""
             />
+
             <p className="text-xs text-gray-500">Free Next-day Delivery</p>
           </div>
         )}
@@ -78,5 +79,4 @@ function CheckoutProducts({
     </div>
   );
 }
-
 export default CheckoutProducts;

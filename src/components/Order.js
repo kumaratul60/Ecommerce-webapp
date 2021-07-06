@@ -1,4 +1,4 @@
-import moment from "moment";
+ import moment from "moment";
 import Currency from "react-currency-formatter";
 
 function Order({ id, amount, amountShipping, items, timestamp, images }) {
@@ -31,7 +31,7 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
             <img
               src={image}
               alt=""
-              className="h-20 object-contain sm:hover:h-32"
+              className="h-20 object-contain sm:h-32"
             />
           ))}
         </div>

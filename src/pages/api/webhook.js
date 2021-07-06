@@ -1,14 +1,15 @@
 import { buffer } from "micro";
 import * as admin from "firebase-admin";
 
-const serviceAccount = require("../../../permissionKey.json");
+// Source a connection to FIREBASE from the backend
+const serviceAccount = require("../../../permissionKey.json"); // "../"-> upper directory
 
-// To protect from double initialization and Secure a connection to FIREBASE from the backend
-const app = !admin.apps.length
+// To protect from double(do not initialize app twice) initialization and Secure a connection to FIREBASE from the backend
+const app = !admin.apps.length //  if no app already initialize then we initialize the app
   ? admin.initializeApp({
       credential: admin.credential.cert(serviceAccount), // cert -> certificate key
     })
-  : admin.app;
+  : admin.app();
 
 // Establish connection to STRIPE
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -20,13 +21,14 @@ const fulfillOrder = async (session) => {
   // console.log("Fulfilling order", session);
 
   return app
-    .firebase()
+    .firestore()
     .collection("users")
     .doc(session.metadata.email)
-    .collection("orders")
+    .collection("orders")  
     .doc(session.id)
     .set({
-      amount: session.amount_total / 100,
+      amount: session.amount_total / 100, // x/100 bcoz we use subcurrency so we get back to regular reading currency when
+      // we pushingg database
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
