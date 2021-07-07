@@ -24,7 +24,7 @@ const fulfillOrder = async (session) => {
     .firestore()
     .collection("users")
     .doc(session.metadata.email)
-    .collection("orders")  
+    .collection("orders")
     .doc(session.id)
     .set({
       amount: session.amount_total / 100, // x/100 bcoz we use subcurrency so we get back to regular reading currency when
@@ -42,6 +42,8 @@ export default async (req, res) => {
   if (req.method === "POST") {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
+
+    //  raw body       ^^^^^^^^^^^^^^
     const sig = req.headers["stripe-signature"];
 
     let event;
@@ -50,10 +52,14 @@ export default async (req, res) => {
 
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endPointSecret);
+      // body of request, already raw        ^^^^^^^^
     } catch (err) {
+      // On error, log and return the error message
       console.log("Error", err.message);
-      return res.status(400).send(`Webhook error: ${err.message}`);
+      return res.status(400).send(` ❌ Webhook error: ${err.message}`);
     }
+    // Successfully constructed event
+    console.log("✅ Success:", event.id);
 
     // Handle the checkout.session.completed event
 
@@ -69,6 +75,7 @@ export default async (req, res) => {
 };
 
 // Changing the api setting to handle the bodyparser
+// Return a response to acknowledge receipt of the event
 export const config = {
   api: {
     bodyParser: false,
