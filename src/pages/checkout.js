@@ -26,9 +26,11 @@ function Checkout() {
 
     // Redirect user/customer to Stripe checkout
     const result = await stripe.redirectToCheckout({
+      // key : value
       sessionId: checkoutSession.data.id,
     });
 
+    // without braces bcoz it is one liner
     if (result.error) alert(result.error.message);
   };
 

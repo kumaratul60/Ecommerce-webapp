@@ -58,8 +58,8 @@ export async function getServerSideProps(context) {
   // Get the user logged in credentials...
 
   //   useSession in fontend
-  // getSession in backend/server-render
-  // context -> it contains request, response, etc...
+  //   getSession in backend/server-render
+  //   context -> it contains request, response, etc...
 
   const session = await getSession(context);
 
@@ -84,8 +84,7 @@ export async function getServerSideProps(context) {
       amount: order.data().amount,
       amountShipping: order.data().amount_shipping,
       images: order.data().images,
-      timestamp: moment(order.data().timestamp.toDate()).unix(), // unix -> convert the number to actual date istead of this by
-      // doing directly you can loose the actule date format, so to prevent form this use Unix to translate this.
+      timestamp: moment(order.data().timestamp.toDate()).unix(), // unix -> convert the number to actual date istead of this by doing directly you can loose the actule date format, so to prevent form this use Unix to translate this.
 
       items: (
         await stripe.checkout.sessions.listLineItems(order.id, {

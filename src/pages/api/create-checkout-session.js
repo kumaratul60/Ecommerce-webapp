@@ -1,4 +1,3 @@
-
 // creating API end point
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -10,10 +9,10 @@ export default async (req, res) => {
 
   //  items.map(item => ({xyz,pqr})) ==> that is implicit return
 
-  
+  // in stripe they take every curruncy as sub currency which means that if we talk about pounds it can be pannies or if we talk about doller it can be sense.   100 pannies = 1 Pounds
 
   const transformedItems = items.map((item) => ({
-    description: item.description,   
+    description: item.description,
     quantity: 1,
     price_data: {
       currency: "inr",
@@ -42,8 +41,8 @@ export default async (req, res) => {
     cancel_url: `${process.env.HOST}/checkout`,
     metadata: {
       email,
-      images: JSON.stringify(items.map((item) => item.image)), 
-//  JSON.stringify -> make a array in one massive string
+      images: JSON.stringify(items.map((item) => item.image)),
+      //  JSON.stringify -> make a array in one massive string
     },
   });
   res.status(200).json({ id: session.id });
