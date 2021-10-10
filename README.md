@@ -1,3 +1,9 @@
+Building an e-commerce webapp using React.js, Next.js. Tailwind CSS
+This project contains authentication, routing, API, redux, Stripe
+for payment integration.
+Users can choose products and add/remove items in the basket
+
+
 
 ## [Live link](https://ecommerce-webapp-483i0p9fb-kumaratul60.vercel.app)
 
