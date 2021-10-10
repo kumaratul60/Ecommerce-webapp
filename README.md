@@ -7,6 +7,16 @@ Users can choose products and add/remove items in the basket
 
 ## [Live link](https://ecommerce-webapp-483i0p9fb-kumaratul60.vercel.app)
 
+### Snapshots of project 👇 
+
+<img target="_blank" src="1.png">
+
+<img target="_blank" src="3.png">
+
+<img target="_blank" src="4.png">
+
+![Alt Text](5.png?raw=true "Title")
+
 
 
 # Installation Steps
