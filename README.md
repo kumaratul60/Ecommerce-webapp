@@ -11,11 +11,19 @@ Users can choose products and add/remove items in the basket
 
 <img target="_blank" src="1.png">
 
+<img target="_blank" src="2.png">
+
+
 <img target="_blank" src="3.png">
+
 
 <img target="_blank" src="4.png">
 
-![Alt Text](5.png?raw=true "Title")
+<img target="_blank" src="5.png">
+
+<img target="_blank" src="6.png">
+
+![Alt Text](7.png?raw=true "Title")
 
 
 
