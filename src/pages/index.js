@@ -44,15 +44,19 @@ export async function getServerSideProps(context) {
   };
 }
 
-// getServerSideProps() -> that function makes a virtual a server that server calculate the page and render to browser. That server is also knows serverSideRendering.
+// getServerSideProps() -> that function makes a virtual a server that server calculate the page and render to browser. That server is also knows serverSideRendering. The page is pre-rendered at run time
 
-// getServerSideProps() -> that function is also define the that is no longer static page, it needs the middle server step.
+// getServerSideProps() -> that function is also define the that is no longer static page, it needs the middle server step. The page is pre-rendered at build time
 
 // it means the first calculate the something on server(which request made by client), second render out the page ,third deliver at to user on the page, rather than just sending the entire site to the user.
 
 // context -> fetching the data
 
 // fetch -> fetch is a built in function and it's await because it's going to be an asynchronous call.
+
+// async -> use to return promise
+
+//  await -> use to wait and handle promise
 
 //  res.json() -> it give data back in json format.
 

@@ -54,7 +54,10 @@ function Header() {
             <p className="hover:underline">
               {session ? `Hello, ${session.user.name}` : "Sign In "}
             </p>
-            <p className="font-bold md:text-sm">Account & List</p>
+            {/* <p className="font-bold md:text-sm">Account & List</p> */}
+            <p className="font-bold md:text-sm">
+              {session ? "Logout" : "Account & List"}
+            </p>
           </div>
           <div
             onClick={() => router.push("/orders  ")}

@@ -55,7 +55,7 @@ function Checkout() {
             </h1>
 
             {/* i= index */}
-            {/*  when mapping through array in react always used unique key, if you don't have unique key used index */}
+            {/*  when mapping through array in react always used unique key for iterating over item and prevent from duplicaty, if you don't have unique key used index */}
             {/*  best case : unique key
                 worst case : index
 
@@ -89,7 +89,7 @@ function Checkout() {
               <button
                 role="link"
                 onClick={createCheckoutSession}
-               disabled={!session}
+                disabled={!session}
                 className={`button mt-2  ${
                   !session &&
                   "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"

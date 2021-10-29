@@ -23,8 +23,7 @@ export const basketSlice = createSlice({
         // If the items exists in the basket then remove it
         newBasket.splice(index, 1);
 
-        // don't use filter because array the filter array will get read of all of the items with that id
-        // or every single items with that id.  you don't want to do that
+        // don't use filter because array the filter array will get read of all of the items with that id or every single items with that id.  you don't want to do that
       } else {
         //console.warn() is used to display the warning messages on the console.
         console.warn(`Can't remove product (id: ${action.payload.id}) `);
@@ -32,13 +31,21 @@ export const basketSlice = createSlice({
       // final login to make every thing is work fine
       state.items = newBasket;
     },
+
+    removeGroupedFromBasket: (state, action) => {
+      let newBasket = state.items.filter(
+        (item) => item.id !== action.payload.id
+      );
+
+      state.items = newBasket;
+    },
   },
 });
 
-export const { addToBasket, removeFromBasket } = basketSlice.actions;
+export const { addToBasket, removeFromBasket, removeGroupedFromBasket } =
+  basketSlice.actions;
 
-// Selectors - This is how we pull/grab the information from the Global store slice in particular,
-//the basket slice of the global store
+// Selectors - This is how we pull/grab the information from the Global store slice in particular,the basket slice of the global store
 
 export const selectItems = (state) => state.basket.items;
 export const selectTotal = (state) =>

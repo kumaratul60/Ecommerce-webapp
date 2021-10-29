@@ -9,9 +9,10 @@ const Max_Rating = 5;
 const Min_Rating = 1;
 
 function Product({ id, title, price, description, category, image }) {
-  // State is sort term memory per component
+  // State is a set of data to manage component and it has sort term memory per component
   // useState take initial state.
 
+  //  Sending the product via an action to the redux store [= basket "slice"]
   const dispatch = useDispatch(addToBasket);
 
   //const [rating] = useState(5);
@@ -39,7 +40,7 @@ function Product({ id, title, price, description, category, image }) {
   };
 
   return (
-    <div className="relative flex flex-col m-5 bg-white z-30 p-10">
+    <div className="relative flex flex-col m-5 bg-white z-30 p-10 growing-hover">
       <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {category}
       </p>

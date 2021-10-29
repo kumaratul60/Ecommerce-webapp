@@ -1,8 +1,12 @@
-import { StarIcon } from "@heroicons/react/solid";
+import { MinusSmIcon, PlusIcon, StarIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
-import { addToBasket, removeFromBasket } from "../slices/basketSlice";
+import {
+  addToBasket,
+  removeFromBasket,
+  removeGroupedFromBasket,
+} from "../slices/basketSlice";
 
 function CheckoutProducts({
   id,
@@ -15,6 +19,7 @@ function CheckoutProducts({
   hasPrime,
 }) {
   const dispatch = useDispatch();
+
   const addItemToBasket = () => {
     const product = {
       id,
@@ -35,14 +40,20 @@ function CheckoutProducts({
     dispatch(removeFromBasket({ id }));
   };
 
+  function removeGroupFromBasket() {
+    dispatch(removeGroupedFromBasket({ id }));
+  }
+
   return (
-    <div className="flex flex-col-5">
-      <Image src={image} height={200} width={200} objectFit="contain" />
+    <div className="block py-4 sm:grid sm:grid-cols-5 my-16 sm:my-3">
+      <div className="text-center sm:text-left">
+        <Image src={image} width={200} height={200} objectFit="contain" />
+      </div>
 
       {/* Middle section */}
       {/* mx-5 => margin in left & right is 5 */}
-      <div className="col-span-3 mx-5">
-        <p>{title}</p>
+      <div className="col-span-3 mx-5 mb-4 sm:mb-0">
+        <p className="my-3">{title}</p>
         <div className="flex    ">
           {/* map(value, index  ) */}
           {Array(rating)
@@ -51,9 +62,10 @@ function CheckoutProducts({
               <StarIcon key={i} className="h-5 text-yellow-500" />
             ))}
         </div>
-        <p className="text-xs my-2 line-clamp-3">{description}</p>
+        <p className="text-sm mt-2 my-2 line-clamp-3">{description}</p>
+
         <Currency quantity={price} currency="INR" />
-        {/* <Currency quantity={price} /> */}
+
         {hasPrime && (
           <div className="flex items-center space-x-2">
             <img
@@ -68,10 +80,12 @@ function CheckoutProducts({
         )}
       </div>
       {/* Right add/remove buttons */}
-      <div className="flex  flex-col space-y-5  my-auto justify-self-end ">
+
+      <div className="flex flex-col space-y-2 my-auto justify-self-end">
         <button className="button" onClick={addItemToBasket}>
           Add to basket
         </button>
+
         <button className="button" onClick={removeItemFromBasket}>
           Remove from basket
         </button>

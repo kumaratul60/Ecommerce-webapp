@@ -34,7 +34,7 @@ export default async (req, res) => {
       allowed_countries: ["CA", "US", "IN", "GB"],
     },
 
-    // line_items -> all the object that having map order so in this case transformedItems is line_items
+    // line_items -> all the object that having map order so in this case transformedItems is line_items means transfer item to stripe
     line_items: transformedItems,
     mode: "payment",
     success_url: `${process.env.HOST}/success`,
